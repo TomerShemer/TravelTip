@@ -118,7 +118,7 @@ function onCopyUrl() {
     const currLoc = locService.getCurrLoc()
     const { lat, lng } = currLoc
     const url = getUrl(lat, lng)
-    console.log('url', url)
+    navigator.clipboard.writeText(url)
 }
 
 function renderLocationTxt(lat, lng) {
