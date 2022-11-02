@@ -14,6 +14,7 @@ window.onGetUserPos = onGetUserPos
 window.onGoToLoc = onGoToLoc
 window.onDeleteLoc = onDeleteLoc
 
+let gMarkers = []
 
 
 function onInit() {
@@ -41,6 +42,7 @@ function onAddMarker(lat = 32.0749831, lng = 34.9120554) {
 
 function onGetLocs() {
     locService.getLocs().then((locs) => {
+
         const strHtmls = locs.map((loc) => {
             onAddMarker(loc.lat, loc.lng)
             return `<tr>
@@ -55,16 +57,18 @@ function onGetLocs() {
     });
 }
 function onGetUserPos() {
+    console.log('test??');
     getPosition()
-        .then(pos => {
-            console.log('User position is:', pos.coords)
-            document.querySelector('.user-pos').innerText =
-                `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+        .then((pos) => {
+            console.log('User position is:', pos.coords);
+            mapService.addMarker(pos.coords);
+            mapService.panTo(pos.coords.latitude, pos.coords.longitude);
         })
-        .catch(err => {
-            console.log('err!!!', err)
-        })
+        .catch((err) => {
+            console.log('err!!!', err);
+        });
 }
+
 function onPanTo() {
     console.log('Panning the Map')
     mapService.panTo(35.6895, 139.6917)

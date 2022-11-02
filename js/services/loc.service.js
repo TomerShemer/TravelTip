@@ -26,7 +26,6 @@ function getLocs() {
 function setNewLoc(lat, lng) {
     const name = prompt('Enter name for location')
     if (!name) return
-
     locs.push({
         name,
         lat,
@@ -39,10 +38,11 @@ function setNewLoc(lat, lng) {
 }
 
 function deleteLoc(id) {
-    debugger
-    const locIdx = locs.indexOf(loc => {
-        return loc.id === id
+    let locIdx = -1
+    locs.filter((loc, idx) => {
+        if (loc.id === id) locIdx = idx
     })
     if (locIdx < 0) return
     locs.splice(locIdx, 1)
+    controller.onGetLocs()
 }

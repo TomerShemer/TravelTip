@@ -14,11 +14,9 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/TripAdvisor_Logo.svg/1024px-TripAdvisor_Logo.svg.png"></a>
     <h1 class="header-logo">TravelTip Starter</h1>
     <nav class="main-nav">
-        <form action="">
-            <input type="search">
-            <button class="go-button">Go</button>
-            <button class="myloc-button">My Location</button>
-        </form>
+        <input type="search" placeholder="Search a location">
+        <button class="go-button">Go</button>
+        <button onclick="onGetUserPos()" class="myloc-button">My Location</button>
     </nav>
 
     <main class="main-container">
@@ -36,7 +34,6 @@
     </main>
 
     <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-    <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
     <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
     <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
 
@@ -45,7 +42,7 @@
     <pre class="locs"></pre>
     </p>
 
-
+    <footer>Coffee rights </footer>
     <script type="module" src="js/app.controller.js"></script>
 </body>
 

@@ -5,7 +5,6 @@ export const mapService = {
     initMap,
     addMarker,
     panTo,
-
 }
 // Var that is used throughout this Module (not global)
 const STORAGE_MAP_KEY = 'mapDB';
@@ -36,31 +35,13 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 const latlng = mapsMouseEvent.latLng.toJSON()
                 locService.setNewLoc(latlng.lat, latlng.lng)
 
-
             });
         })
 }
 
-/*function initMap(lat = 32.0749831, lng = 34.9120554) {
-    console.log('InitMap')
-    return _connectGoogleApi()
-        .then(() => {
-            console.log('google available')
-            gMap = new google.maps.Map(
-                document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
-            console.log('Map!', gMap)
-            gMap.addListener('click', function (e) {
-                console.log(e);
-                addMarker(e.latLng);
-            })
-        })
-}*/
-
 function addMarker(loc) {
     if (gMarker) gMarker.setMap(null);
+    debugger
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
@@ -70,7 +51,11 @@ function addMarker(loc) {
     // console.log('gMarkers', gMarkers)
 }
 
-function removeMarker() {
+function getMarkers() {
+    return gMarkers
+}
+
+function removeMarkers() {
 
 }
 

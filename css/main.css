@@ -4,10 +4,9 @@
 body{
     margin: 0 auto;
     text-align: center;
-    background-color: #100c30;
     font-family: monospace;
     color: #fff;
-    background-color: rgb(108, 108, 108);
+    background-color: rgba(45, 182, 159, 0.737);
 }
 button{
     background-color: #ffffff; /* Green */
@@ -20,22 +19,26 @@ button{
     font-size: 13px;
     cursor: pointer;
 }
-button:hover{
-    background-color: tomato;
-    transition: 0.5s;
+button:hover:not(.go-button, .myloc-button){
+    background-color: rgb(0, 252, 177);
+    transition: 0.7s;
 }
-
+footer{
+    background-color: black;
+    margin-top: 30px;
+    padding: 40px;
+}
 .header-logo{
     font-size: 14px;
-    color: rgba(0, 255, 179, 0.435);
+    color: rgba(0, 255, 179, 0.544);
 }
 .main-nav{
-    background-color: #fff;
     border-radius: 5px;
     margin: 0 auto;
     width: 40%;
-    background-color: #646464e5;
+    background-color: #03e9995a;
     padding: 30px;
+    
     margin-bottom: 10px;
 }
 .go-button{
@@ -47,8 +50,12 @@ button:hover{
     color: #fff;
     background-color: red;
 }
+.go-button:hover, .myloc-button:hover{
+    background-color: rgba(255, 255, 255, 0.748);
+    transition: .9s;
+}
 .main-container{
-    background-color: rgba(140, 140, 140, 0.458);
+    background-color: rgba(255, 255, 255, 0.149);
     display: flex;
     padding: 50px ;
     justify-content: space-evenly;
