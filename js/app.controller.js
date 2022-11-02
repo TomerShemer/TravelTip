@@ -12,8 +12,8 @@ window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onGoToLoc = onGoToLoc
+window.onDeleteLoc = onDeleteLoc
 
-let gMarkers = []
 
 
 function onInit() {
@@ -47,7 +47,7 @@ function onGetLocs() {
                         <td class="name">${loc.name}</td>
                         <td class="name">${loc.weather}°</td>
                         <td><button onclick="onGoToLoc(${loc.lat},${loc.lng})">Go Location</button></td>
-                        <td><button onclick="onDeleteLoc(${loc.id})">Delete Location</button></td>
+                        <td><button onclick="onDeleteLoc('${loc.id}')">Delete Location</button></td>
                     </tr>`
         });
         document.querySelector('.locs-container').innerHTML = strHtmls.join('');
@@ -72,7 +72,8 @@ function onPanTo() {
 function onGoToLoc(lat, lng) {
     mapService.panTo(lat, lng)
 }
-function onDeleteLoc(lat, lng) {
-    locService.deleteLoc(lat, lng);
+function onDeleteLoc(id) {
+    locService.deleteLoc(id);
     onGetLocs();
+
 }

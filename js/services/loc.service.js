@@ -1,11 +1,13 @@
 import { controller } from '../app.controller.js';
 import { util } from './utils.service.js'
 import { storageService } from './storage.service.js';
+import { mapService } from './map.service.js';
 
 
 export const locService = {
     getLocs,
     setNewLoc,
+    deleteLoc,
 }
 
 const locs = [
@@ -20,14 +22,27 @@ function getLocs() {
         // }, 2000)
     })
 }
-//test
+
 function setNewLoc(lat, lng) {
+    const name = prompt('Enter name for location')
+    if (!name) return
+
     locs.push({
-        name: prompt('Enter name for location'),
-        lat: lat,
-        lng: lng,
+        name,
+        lat,
+        lng,
     })
+    mapService.addMarker({ lat, lng })
     controller.onGetLocs()
     controller.onGoToLoc(lat, lng)
     storageService.save()
+}
+
+function deleteLoc(id) {
+    debugger
+    const locIdx = locs.indexOf(loc => {
+        return loc.id === id
+    })
+    if (locIdx < 0) return
+    locs.splice(locIdx, 1)
 }

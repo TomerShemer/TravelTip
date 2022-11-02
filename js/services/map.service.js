@@ -11,6 +11,8 @@ export const mapService = {
 const STORAGE_MAP_KEY = 'mapDB';
 var gMarker
 var gMap
+let gMarkers = []
+
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
@@ -26,14 +28,14 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
         })
         .then(() => {
             gMap.addListener("click", (mapsMouseEvent) => {
-                // Create a new InfoWindow.
-                let infoWindow = new google.maps.InfoWindow({
-                    position: mapsMouseEvent.latLng,
+                // // Create a new InfoWindow.
+                // let infoWindow = new google.maps.InfoWindow({
+                //     position: mapsMouseEvent.latLng,
 
-                });
+                // });
                 const latlng = mapsMouseEvent.latLng.toJSON()
                 locService.setNewLoc(latlng.lat, latlng.lng)
-                addMarker(latlng)
+
 
             });
         })
@@ -64,24 +66,12 @@ function addMarker(loc) {
         map: gMap,
         title: 'Hello World!'
     })
+    gMarkers.push(marker)
+    // console.log('gMarkers', gMarkers)
+}
 
-    const infowindow = new google.maps.InfoWindow({
-        content: `
-                <h2>Hello</h2>
-                <form onsubmit="setNewLoc(event)">
-                    <input class="input-loc-name" type="text" placeholder="Enter location name">
-                    <button>Submit</button>
-                </form>
-                `,
-    });
+function removeMarker() {
 
-    marker.addListener("click", () => {
-        infowindow.open({
-            anchor: marker,
-            map: gMap,
-        });
-    });
-    // gMarker = marker
 }
 
 function panTo(lat, lng) {
