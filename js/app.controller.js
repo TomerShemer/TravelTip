@@ -1,18 +1,24 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
-
+export const controller = {
+    onGetLocs,
+    onGoToLoc
+}
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 
+
 function onInit() {
-    mapService.initMap()
+    mapService
+        .initMap()
         .then(() => {
-            console.log('Map is ready')
+            console.log('Map is ready');
+            onGetLocs()
         })
-        .catch(() => console.log('Error: cannot init map'))
+        .catch(() => console.log('Error: cannot init map'));
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
