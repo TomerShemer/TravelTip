@@ -1,5 +1,6 @@
 import { locService } from './loc.service.js';
 import { storageService } from './storage.service.js';
+import { controller } from '../app.controller.js'
 
 export const mapService = {
     initMap,
@@ -66,6 +67,7 @@ function removeMarkers() {
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng)
     gMap.panTo(laLatLng)
+    locService.setCurrLoc(lat, lng)
 }
 
 
@@ -94,6 +96,7 @@ function getLocationByName(txt) {
             console.log(loc.data.results[0].geometry.location)
             panTo(location.lat, location.lng);
             addMarker({ lat: location.lat, lng: location.lng })
+            controller.renderLocationTxt(location.lat, location.lng)
         })
         .catch((err) => {
             console.log('Not enabled to get any location / API Key wrong.', err);

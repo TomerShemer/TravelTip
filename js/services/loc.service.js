@@ -8,6 +8,9 @@ export const locService = {
     getLocs,
     setNewLoc,
     deleteLoc,
+    getLocByCoords,
+    setCurrLoc,
+    getCurrLoc,
 }
 
 const STORAGE_MAP_KEY = 'mapDB';
@@ -17,6 +20,8 @@ const locs = storageService.load(STORAGE_MAP_KEY) || [
     { id: util.makeId(), name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
 ]
 
+let gCurrLoc
+
 function getLocs() {
     return new Promise((resolve, reject) => {
         // setTimeout(() => {
@@ -25,6 +30,10 @@ function getLocs() {
 
         // }, 2000)
     })
+}
+
+function getLocByCoords(lat, lng) {
+    return locs.filter(loc => loc.lat === lat && loc.lng === lng)[0]
 }
 
 function setNewLoc(lat, lng, name = prompt('Enter name for location')) {
@@ -53,4 +62,12 @@ function deleteLoc(id) {
 
 function _saveLocationsToStorage() {
     storageService.save(STORAGE_MAP_KEY, locs);
+}
+
+function setCurrLoc(lat, lng) {
+    gCurrLoc = getLocByCoords(lat, lng)
+}
+
+function getCurrLoc() {
+    return gCurrLoc
 }

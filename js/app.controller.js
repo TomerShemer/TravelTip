@@ -4,7 +4,8 @@ import { storageService } from './services/storage.service.js'
 
 export const controller = {
     onGetLocs,
-    onGoToLoc
+    onGoToLoc,
+    renderLocationTxt,
 }
 window.onload = onInit
 window.onAddMarker = onAddMarker
@@ -13,7 +14,8 @@ window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onGoToLoc = onGoToLoc
 window.onDeleteLoc = onDeleteLoc
-window.onSearchLocation = onSearchLocation;
+window.onSearchLocation = onSearchLocation
+window.onCopyUrl = onCopyUrl
 
 
 function onInit() {
@@ -62,6 +64,8 @@ function onGetUserPos() {
             console.log('User position is:', pos.coords);
             mapService.addMarker(pos.coords);
             mapService.panTo(pos.coords.latitude, pos.coords.longitude);
+            locService.setNewLoc(pos.coords.latitude, pos.coords.longitude, 'User Location')
+            locService.getLocs()
         })
         .catch((err) => {
             console.log('err!!!', err);
@@ -74,7 +78,7 @@ function onPanTo() {
 }
 function onGoToLoc(lat, lng) {
     mapService.panTo(lat, lng)
-    renderUrl({ lat, lng })
+    renderLocationTxt(lat, lng)
 }
 function onDeleteLoc(id) {
     locService.deleteLoc(id);
@@ -82,11 +86,11 @@ function onDeleteLoc(id) {
 
 }
 
-function renderUrl(loc) {
-    var queryStringParams = `?lat=${loc.lat || ''}&lng=${loc.lng}`
-    if (!loc.lat && !loc.lng) queryStringParams = ''
-    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringParams
-    window.history.pushState({ path: newUrl }, '', newUrl)
+function getUrl(lat, lng) {
+    var queryStringParams = `?lat=${lat || ''}&lng=${lng}`
+    if (!lat && !lng) queryStringParams = ''
+    return window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringParams
+    // window.history.pushState({ path: newUrl }, '', newUrl)
 }
 
 function renderLocationByQueryStringParams() {
@@ -95,8 +99,12 @@ function renderLocationByQueryStringParams() {
     const lat = +queryStringParams.get('lat') || ''
     const lng = +queryStringParams.get('lng') || ''
     if (!lat || !lng) return
-
     onGoToLoc(lat, lng)
+    const isExisting = locService.getLocs().some(loc => {
+        return loc.lat === lat && loc.lng === lng
+    })
+    if (isExisting) return
+
     locService.setNewLoc(lat, lng, 'New Location')
     onGetLocs()
 }
@@ -104,4 +112,16 @@ function onSearchLocation(ev) {
     ev.preventDefault();
     console.log(ev.target[0].value);
     mapService.getLocationByName(ev.target[0].value);
+}
+
+function onCopyUrl() {
+    const currLoc = locService.getCurrLoc()
+    const { lat, lng } = currLoc
+    const url = getUrl(lat, lng)
+    console.log('url', url)
+}
+
+function renderLocationTxt(lat, lng) {
+    const loc = locService.getLocByCoords(lat, lng)
+    document.querySelector('.map-nav h3 span').innerText = loc.name
 }

@@ -12,7 +12,10 @@
 <body>
     <section class="header-bar">
         <div class="ham-menu" onclick="toggleMenu()">≡</div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/TripAdvisor_Logo.svg/1024px-TripAdvisor_Logo.svg.png">
+        <a href="index.html">
+            <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/TripAdvisor_Logo.svg/1024px-TripAdvisor_Logo.svg.png">
+        </a>
         <form onsubmit="onSearchLocation(event)">
             <input type="text" placeholder="🔍 Search a location">
         </form>
@@ -24,7 +27,7 @@
     <main class="main-container">
         <nav class="map-nav">
             <h3>Location: <span class="address-span"></span></h3>
-            <button>Copy Location</button>
+            <button onclick="onCopyUrl()">Copy Location</button>
         </nav>
 
 
@@ -35,9 +38,9 @@
 
     </main>
 
-    <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-    <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+    <!-- <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button> -->
+    <!-- <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button> -->
+    <!-- <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button> -->
 
     <p>You are at: <span class="user-pos"></span></p>
     <p>Locations:
