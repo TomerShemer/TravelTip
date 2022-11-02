@@ -17,7 +17,7 @@ function getLocs() {
         }, 2000)
     })
 }
-
+//test
 function setNewLoc(lat, lng) {
     locs.push({
         name: prompt('Enter name for location'),
