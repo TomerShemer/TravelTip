@@ -22,12 +22,15 @@ function getLocs() {
 }
 //test
 function setNewLoc(lat, lng) {
+    const name = prompt('Enter name for location')
+    if(!name) return
     locs.push({
-        name: prompt('Enter name for location'),
-        lat: lat,
-        lng: lng,
+        name,
+        lat,
+        lng,
     })
     controller.onGetLocs()
     controller.onGoToLoc(lat, lng)
     storageService.save()
+    addMarker(lat)
 }

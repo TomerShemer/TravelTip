@@ -33,7 +33,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 });
                 const latlng = mapsMouseEvent.latLng.toJSON()
                 locService.setNewLoc(latlng.lat, latlng.lng)
-                addMarker(latlng)
+    
 
             });
         })
