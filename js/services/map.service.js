@@ -11,9 +11,8 @@ export const mapService = {
     getLocationByName,
 }
 // Var that is used throughout this Module (not global)
-
+const STORAGE_MAP_KEY = 'mapDB';
 const API_KEY = 'AIzaSyDGWeJL2TG9pFic9i1BQLN5-5_jx1YbQNc'
-
 var gMarker
 var gMap
 let gMarkers = []
