@@ -1,14 +1,43 @@
+import { locService } from './loc.service.js';
+
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+
 }
-
-
 // Var that is used throughout this Module (not global)
+var gMarker
 var gMap
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
+    console.log('InitMap');
+
+    return _connectGoogleApi()
+        .then(() => {
+            console.log('google available');
+            gMap = new google.maps.Map(
+                document.querySelector('#map'), {
+                    center: { lat, lng },
+                    zoom: 15
+                })
+        })
+        .then(() => {
+            gMap.addListener("click", (mapsMouseEvent) => {
+                // Create a new InfoWindow.
+                let infoWindow = new google.maps.InfoWindow({
+                    position: mapsMouseEvent.latLng,
+
+                });
+                const latlng = mapsMouseEvent.latLng.toJSON()
+                locService.setNewLoc(latlng.lat, latlng.lng)
+                addMarker(latlng)
+
+            });
+        })
+}
+
+/*function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap')
     return _connectGoogleApi()
         .then(() => {
@@ -20,9 +49,10 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             })
             console.log('Map!', gMap)
         })
-}
+}*/
 
 function addMarker(loc) {
+    if (gMarker) gMarker.setMap(null);
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,

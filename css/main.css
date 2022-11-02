@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 body{
-    background-color: tomato;
+    background-color: rgb(108, 108, 108);
 }
 button{
     background-color: rgb(50, 50, 50);
