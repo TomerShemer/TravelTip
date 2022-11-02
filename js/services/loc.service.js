@@ -16,6 +16,4 @@ function getLocs() {
     })
 }
 
-// test
-//test 2
 
