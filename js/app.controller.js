@@ -1,5 +1,7 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+import { storageService } from './services/storage.service.js'
+
 export const controller = {
     onGetLocs,
     onGoToLoc

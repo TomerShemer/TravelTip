@@ -1,5 +1,6 @@
 import { controller } from '../app.controller.js';
 import { util } from './utils.service.js'
+import { storageService } from './storage.service.js';
 
 
 export const locService = {
@@ -19,9 +20,8 @@ function getLocs() {
         // }, 2000)
     })
 }
-
+//test
 function setNewLoc(lat, lng) {
-    ev.preventDefault()
     locs.push({
         name: prompt('Enter name for location'),
         lat: lat,
@@ -29,4 +29,5 @@ function setNewLoc(lat, lng) {
     })
     controller.onGetLocs()
     controller.onGoToLoc(lat, lng)
+    storageService.save()
 }
