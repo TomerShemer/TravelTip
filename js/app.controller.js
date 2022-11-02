@@ -14,8 +14,6 @@ window.onGetUserPos = onGetUserPos
 window.onGoToLoc = onGoToLoc
 window.onDeleteLoc = onDeleteLoc
 
-let gMarkers = []
-
 
 function onInit() {
     mapService
@@ -23,6 +21,7 @@ function onInit() {
         .then(() => {
             console.log('Map is ready');
             onGetLocs()
+            renderLocationByQueryStringParams()
         })
         .catch(() => console.log('Error: cannot init map'));
 }
@@ -42,7 +41,7 @@ function onAddMarker(lat = 32.0749831, lng = 34.9120554) {
 
 function onGetLocs() {
     locService.getLocs().then((locs) => {
-
+        mapService.removeMarkers()
         const strHtmls = locs.map((loc) => {
             onAddMarker(loc.lat, loc.lng)
             return `<tr>
@@ -53,7 +52,6 @@ function onGetLocs() {
                     </tr>`
         });
         document.querySelector('.locs-container').innerHTML = strHtmls.join('');
-
     });
 }
 function onGetUserPos() {
@@ -75,9 +73,30 @@ function onPanTo() {
 }
 function onGoToLoc(lat, lng) {
     mapService.panTo(lat, lng)
+    renderUrl({ lat, lng })
 }
 function onDeleteLoc(id) {
     locService.deleteLoc(id);
     onGetLocs();
+
+}
+
+function renderUrl(loc) {
+    var queryStringParams = `?lat=${loc.lat || ''}&lng=${loc.lng}`
+    if (!loc.lat && !loc.lng) queryStringParams = ''
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringParams
+    window.history.pushState({ path: newUrl }, '', newUrl)
+}
+
+function renderLocationByQueryStringParams() {
+    const queryStringParams = new URLSearchParams(window.location.search)
+    // console.log('queryStringParams', queryStringParams)
+    const lat = +queryStringParams.get('lat') || ''
+    const lng = +queryStringParams.get('lng') || ''
+    if (!lat || !lng) return
+
+    onGoToLoc(lat, lng)
+    locService.setNewLoc(lat, lng, 'New Location')
+    onGetLocs()
 
 }

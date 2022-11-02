@@ -10,7 +10,9 @@ export const locService = {
     deleteLoc,
 }
 
-const locs = [
+const STORAGE_KEY = 'locsDB'
+
+const locs = storageService.load(STORAGE_KEY) || [
     { id: util.makeId(), name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
     { id: util.makeId(), name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
 ]
@@ -23,10 +25,10 @@ function getLocs() {
     })
 }
 
-function setNewLoc(lat, lng) {
-    const name = prompt('Enter name for location')
+function setNewLoc(lat, lng, name = prompt('Enter name for location')) {
     if (!name) return
     locs.push({
+        id: util.makeId(),
         name,
         lat,
         lng,
@@ -34,7 +36,7 @@ function setNewLoc(lat, lng) {
     mapService.addMarker({ lat, lng })
     controller.onGetLocs()
     controller.onGoToLoc(lat, lng)
-    storageService.save()
+    // storageService.save()
 }
 
 function deleteLoc(id) {

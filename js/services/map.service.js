@@ -5,6 +5,8 @@ export const mapService = {
     initMap,
     addMarker,
     panTo,
+    getMarkers,
+    removeMarkers,
 }
 // Var that is used throughout this Module (not global)
 const STORAGE_MAP_KEY = 'mapDB';
@@ -41,7 +43,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
 function addMarker(loc) {
     if (gMarker) gMarker.setMap(null);
-    debugger
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
@@ -56,7 +57,7 @@ function getMarkers() {
 }
 
 function removeMarkers() {
-
+    gMarkers.forEach(marker => marker.setMap(null))
 }
 
 function panTo(lat, lng) {
