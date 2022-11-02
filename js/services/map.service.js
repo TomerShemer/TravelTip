@@ -7,6 +7,7 @@ export const mapService = {
     panTo,
     getMarkers,
     removeMarkers,
+    getLocationByName,
 }
 // Var that is used throughout this Module (not global)
 const STORAGE_MAP_KEY = 'mapDB';
@@ -82,4 +83,21 @@ function _connectGoogleApi() {
 
 function saveLocationsToStorage() {
     storageService.save(STORAGE_MAP_KEY, gLocations);
+}
+function getLocationByName(txt) {
+    return axios
+        .get(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${txt}&key=AIzaSyDGWeJL2TG9pFic9i1BQLN5-5_jx1YbQNc`
+        )
+        .then((loc) => {
+            const location = loc.data.results[0].geometry.location
+            console.log(loc.data.results[0].geometry.location)
+            panTo(location.lat, location.lng);
+            addMarker({ lat: location.lat, lng: location.lng })
+        })
+        .catch((err) => {
+            console.log('Not enabled to get any location / API Key wrong.', err);
+            throw err;
+        });
+
 }

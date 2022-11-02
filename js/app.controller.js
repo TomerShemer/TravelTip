@@ -13,6 +13,7 @@ window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onGoToLoc = onGoToLoc
 window.onDeleteLoc = onDeleteLoc
+window.onSearchLocation = onSearchLocation;
 
 
 function onInit() {
