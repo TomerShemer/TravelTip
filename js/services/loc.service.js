@@ -20,12 +20,11 @@ function getLocs() {
 }
 
 function setNewLoc(lat, lng) {
-            locs.push({
-                name: prompt('Enter name for location'),
-                lat: lat,
-                lng: lng,
-            })
-        controller.onGetLocs()
+    locs.push({
+        name: prompt('Enter name for location'),
+        lat: lat,
+        lng: lng,
+    })
     controller.onGetLocs()
     controller.onGoToLoc(lat, lng)
     storageService.save()
