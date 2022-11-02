@@ -1,5 +1,5 @@
 export const storageService = {
-    save: saveToStorage,
+    saveToStorage,
     load: loadFromStorage
 }
 

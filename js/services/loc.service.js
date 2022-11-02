@@ -1,5 +1,4 @@
 import { controller } from '../app.controller.js';
-import { storageService } from './services/storage.service'
 
 export const locService = {
     getLocs,
