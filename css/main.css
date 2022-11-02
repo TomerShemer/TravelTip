@@ -60,6 +60,13 @@ footer{
     background-color: rgba(255, 255, 255, 0.748);
     transition: .9s;
 }
+.ham-menu{
+    display:none;
+    color: red;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
 .main-container{
     background-color: #20c9966e;
     display: flex;
@@ -74,3 +81,75 @@ footer{
     margin: 0 auto;
     margin-bottom: 5px;
 }
+
+
+/* MEDIA QUERIES */
+
+/* MOBILE */ 
+@media (max-width: 638px) {
+    .main-container{
+        background-color: #20c9966e;
+        display: flex;
+        padding: 50px ;
+        justify-content:space-evenly;
+        margin-top: 5px;
+        border-width: thin;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: #0000004a;
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: 5px;
+    }
+    button{
+        margin: 5px;
+    }
+    .ham-menu{
+        display:block;
+        color: rgb(255, 255, 255);
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        font-size: 30px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+  }
+/* TABLET */ 
+  @media (min-width: 639px) and (max-width: 1025px){
+    .main-container{
+        background-color: #f800006e;
+        display: flex;
+        padding: 50px ;
+        justify-content:space-evenly;
+        margin-top: 5px;
+        border-width: thin;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: #0000004a;
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: 5px;
+    }
+    button{
+        margin: 5px;
+    }
+}
+
+/* DESKTOP */ 
+  @media (min-width: 1025px) {
+    .main-container{
+        background-color: #20c9966e;
+        display: flex;
+        padding: 50px ;
+        justify-content: space-evenly;
+        margin-top: 5px;
+        border-width: thin;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: #0000004a;
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom: 5px;
+    }
+  }
