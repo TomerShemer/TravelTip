@@ -9,6 +9,7 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onGoToLoc = onGoToLoc
 
 
 function onInit() {
@@ -29,21 +30,15 @@ function getPosition() {
     })
 }
 
-<<<<<<< HEAD
 function onAddMarker(lat = 32.0749831, lng = 34.9120554) {
     console.log('Adding a marker');
     mapService.addMarker({ lat, lng });
-=======
-function onAddMarker() {
-    console.log('Adding a marker')
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
-
->>>>>>> b9067223f0896ea6a6417da49bf8419cdeb0e92b
 }
 
 function onGetLocs() {
     locService.getLocs().then((locs) => {
         const strHtmls = locs.map((loc) => {
+            onAddMarker(loc.lat, loc.lng)
             return `<tr>
         <td class="name">${loc.name}</td>
         <td class="name">${loc.weather}°</td>
@@ -52,6 +47,7 @@ function onGetLocs() {
          </tr>`
         });
         document.querySelector('.locs-container').innerHTML = strHtmls.join('');
+
     });
 }
 function onGetUserPos() {

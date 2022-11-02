@@ -18,24 +18,11 @@ function getLocs() {
 }
 
 function setNewLoc(lat, lng) {
-<<<<<<< HEAD
-            locs.push({
-                name: prompt('Enter name for location'),
-                lat: lat,
-                lng: lng,
-            })
-        controller.onGetLocs()
-=======
     locs.push({
-        id,
         name: prompt('Enter name for location'),
         lat: lat,
         lng: lng,
-        weather: degree,
-        createdAt: time,
-        updatedAt: time
     })
     controller.onGetLocs()
->>>>>>> b9067223f0896ea6a6417da49bf8419cdeb0e92b
     controller.onGoToLoc(lat, lng)
 }
