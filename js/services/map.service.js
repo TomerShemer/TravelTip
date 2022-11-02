@@ -18,9 +18,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { lat, lng },
-                    zoom: 15
-                })
+                center: { lat, lng },
+                zoom: 15
+            })
         })
         .then(() => {
             gMap.addListener("click", (mapsMouseEvent) => {
@@ -62,7 +62,24 @@ function addMarker(loc) {
         map: gMap,
         title: 'Hello World!'
     })
-    return marker
+
+    const infowindow = new google.maps.InfoWindow({
+        content: `
+                <h2>Hello</h2>
+                <form onsubmit="setNewLoc(event)">
+                    <input class="input-loc-name" type="text" placeholder="Enter location name">
+                    <button>Submit</button>
+                </form>
+                `,
+    });
+
+    marker.addListener("click", () => {
+        infowindow.open({
+            anchor: marker,
+            map: gMap,
+        });
+    });
+    // gMarker = marker
 }
 
 function panTo(lat, lng) {

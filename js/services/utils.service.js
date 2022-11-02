@@ -1,4 +1,7 @@
-'use strict'
+export const util = {
+    getRandomIntInc: getRandomIntInclusive,
+    makeId,
+}
 
 function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
