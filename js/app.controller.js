@@ -13,6 +13,7 @@ window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onGoToLoc = onGoToLoc
 window.onDeleteLoc = onDeleteLoc
+window.onSearchLocation = onSearchLocation;
 
 let gMarkers = []
 
@@ -80,4 +81,10 @@ function onDeleteLoc(id) {
     locService.deleteLoc(id);
     onGetLocs();
 
+}
+function onSearchLocation(ev) {
+    ev.preventDefault();
+    console.log('hey');
+    console.log(ev.target[0].value);
+    mapService.getLocationByName(ev.target[0].value);
 }

@@ -11,8 +11,8 @@ body{
 input{
     border-radius: 50px;
     width: 300px;
-    position: absolute;
     height: 30px;
+    cursor: pointer;
 }
 button{
     background-color: #00000090; /* Green */
@@ -28,6 +28,7 @@ button{
 button:hover:not(.go-button, .myloc-button){
     background-color: rgb(0, 252, 177);
     transition: 0.7s;
+    
 }
 img{
     height: 100px;
@@ -53,7 +54,7 @@ footer{
     background-color: rgba(0, 128, 0, 0.389);
     font-size: 15px;
     border-width: thin;
-
+    cursor: pointer;
 }
 .go-button:hover, .myloc-button:hover{
     background-color: rgba(255, 255, 255, 0.748);
