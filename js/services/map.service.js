@@ -7,6 +7,7 @@ export const mapService = {
 
 }
 // Var that is used throughout this Module (not global)
+const STORAGE_MAP_KEY = 'mapDB';
 var gMarker
 var gMap
 
@@ -83,4 +84,8 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+
+function saveLocationsToStorage() {
+    storageService.save(STORAGE_MAP_KEY, gLocations);
 }

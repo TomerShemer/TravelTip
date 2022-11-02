@@ -1,4 +1,6 @@
 import { controller } from '../app.controller.js';
+import { storageService } from './services/storage.service'
+
 export const locService = {
     getLocs,
     setNewLoc,
@@ -26,4 +28,5 @@ function setNewLoc(lat, lng) {
         controller.onGetLocs()
     controller.onGetLocs()
     controller.onGoToLoc(lat, lng)
+    storageService.save()
 }
