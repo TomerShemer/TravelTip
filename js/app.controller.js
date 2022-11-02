@@ -29,13 +29,18 @@ function onAddMarker() {
 }
 
 function onGetLocs() {
-    locService.getLocs()
-        .then(locs => {
-            console.log('Locations:', locs)
-            document.querySelector('.locs').innerText = JSON.stringify(locs, null, 2)
-        })
+    locService.getLocs().then((locs) => {
+        const strHtmls = locs.map((loc) => {
+            return `<tr>
+        <td class="name">${loc.name}</td>
+        <td class="name">${loc.weather}°</td>
+        <td><button onclick="onGoToLoc(${loc.lat},${loc.lng})">Go Location</button></td>
+        <td><button onclick="onDeleteLoc(${loc.lat},${loc.lng})">Delete Location</button></td>
+         </tr>`
+        });
+        document.querySelector('.locs-container').innerHTML = strHtmls.join('');
+    });
 }
-
 function onGetUserPos() {
     getPosition()
         .then(pos => {
@@ -50,4 +55,11 @@ function onGetUserPos() {
 function onPanTo() {
     console.log('Panning the Map')
     mapService.panTo(35.6895, 139.6917)
+}
+function onGoToLoc(lat, lng) {
+    mapService.panTo(lat, lng)
+}
+function onDeleteLoc(lat, lng) {
+    locService.deleteLoc(lat, lng);
+    onGetLocs();
 }
