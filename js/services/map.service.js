@@ -11,6 +11,7 @@ export const mapService = {
 }
 // Var that is used throughout this Module (not global)
 const STORAGE_MAP_KEY = 'mapDB';
+const API_KEY = 'AIzaSyDGWeJL2TG9pFic9i1BQLN5-5_jx1YbQNc'
 var gMarker
 var gMap
 let gMarkers = []
@@ -87,7 +88,7 @@ function saveLocationsToStorage() {
 function getLocationByName(txt) {
     return axios
         .get(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${txt}&key=AIzaSyDGWeJL2TG9pFic9i1BQLN5-5_jx1YbQNc`
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${txt}&key=${API_KEY}`
         )
         .then((loc) => {
             const location = loc.data.results[0].geometry.location

@@ -101,3 +101,8 @@ function renderLocationByQueryStringParams() {
     onGetLocs()
 
 }
+function onSearchLocation(ev) {
+    ev.preventDefault();
+    console.log(ev.target[0].value);
+    mapService.getLocationByName(ev.target[0].value);
+}
