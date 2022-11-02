@@ -10,7 +10,7 @@ export const mapService = {
     getLocationByName,
 }
 // Var that is used throughout this Module (not global)
-const STORAGE_MAP_KEY = 'mapDB';
+
 var gMarker
 var gMap
 let gMarkers = []
@@ -81,9 +81,7 @@ function _connectGoogleApi() {
     })
 }
 
-function saveLocationsToStorage() {
-    storageService.save(STORAGE_MAP_KEY, gLocations);
-}
+
 function getLocationByName(txt) {
     return axios
         .get(

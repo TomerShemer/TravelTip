@@ -99,5 +99,4 @@ function renderLocationByQueryStringParams() {
     onGoToLoc(lat, lng)
     locService.setNewLoc(lat, lng, 'New Location')
     onGetLocs()
-
 }
