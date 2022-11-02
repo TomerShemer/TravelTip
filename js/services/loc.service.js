@@ -1,7 +1,9 @@
-export const locService = {
-    getLocs
-}
+import { controller } from '../app.controller.js';
 
+export const locService = {
+    getLocs,
+    setNewLoc,
+}
 
 const locs = [
     { name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
@@ -16,6 +18,16 @@ function getLocs() {
     })
 }
 
-// test
-//test 2
-
+function setNewLoc(lat, lng) {
+            locs.push({
+                id,
+                name: prompt('Enter name for location'),
+                lat: lat,
+                lng: lng,
+                weather: degree,
+                createdAt: time,
+                updatedAt: time
+            })
+        controller.onGetLocs()
+    controller.onGoToLoc(lat, lng)
+}
