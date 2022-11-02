@@ -2,7 +2,7 @@ import { controller } from '../app.controller.js';
 import { util } from './utils.service.js'
 import { storageService } from './storage.service.js';
 import { mapService } from './map.service.js';
-
+import { weatherServices } from './weather.serivce.js';
 
 export const locService = {
     getLocs,
@@ -16,8 +16,8 @@ export const locService = {
 const STORAGE_MAP_KEY = 'mapDB';
 
 const locs = storageService.load(STORAGE_MAP_KEY) || [
-    { id: util.makeId(), name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
-    { id: util.makeId(), name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
+    { id: util.makeId(), name: 'Greatplace', lat: 32.047104, lng: 34.832384, weather: 24 },
+    { id: util.makeId(), name: 'Neveragain', lat: 32.047201, lng: 34.832581, weather: 24}
 ]
 
 let gCurrLoc
@@ -38,16 +38,23 @@ function getLocByCoords(lat, lng) {
 
 function setNewLoc(lat, lng, name = prompt('Enter name for location')) {
     if (!name) return
-    locs.push({
-        id: util.makeId(),
-        name,
-        lat,
-        lng,
-    })
+    getWeather(lat, lng)
+        .then(degree => Math.round(degree - 273.15))
+        .then(degree => {
+        locs.push({
+            id: util.makeId(),
+            name,
+            weather: degree,
+            lat,
+            lng,
+            
+        })
+    }),
     mapService.addMarker({ lat, lng })
     controller.onGetLocs()
     controller.onGoToLoc(lat, lng)
     _saveLocationsToStorage()
+    
 }
 
 function deleteLoc(id) {
@@ -70,4 +77,8 @@ function setCurrLoc(lat, lng) {
 
 function getCurrLoc() {
     return gCurrLoc
+}
+function getWeather(lat, lng) {
+    return weatherServices.askWeather(lat, lng)
+        .then((temp) => temp.main.temp);
 }

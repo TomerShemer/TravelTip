@@ -48,8 +48,8 @@ function onGetLocs() {
         const strHtmls = locs.map((loc) => {
             onAddMarker(loc.lat, loc.lng)
             return `<tr>
-                        <td class="name">${loc.name}</td>
-                        <td class="name">${loc.weather}°</td>
+                        <td class="name">${loc.name} | </td>
+                        <td class="name"><p>Temp: ${loc.weather}°</td>
                         <td><button onclick="onGoToLoc(${loc.lat},${loc.lng})">Go Location</button></td>
                         <td><button onclick="onDeleteLoc('${loc.id}')">Delete Location</button></td>
                     </tr>`
@@ -124,5 +124,5 @@ function onCopyUrl() {
 
 function renderLocationTxt(lat, lng) {
     const loc = locService.getLocByCoords(lat, lng)
-    document.querySelector('.map-nav h3 span').innerText = loc.name
+    //document.querySelector('.map-nav h3 span').innerText = loc.name
 }

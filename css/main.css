@@ -48,7 +48,9 @@ footer {
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
 }
-
+.ham-menu{
+    display: none;
+}
 .header-bar {
     margin-top: 0px;
     background-color: #20c997;
@@ -72,14 +74,6 @@ footer {
     transition: .9s;
 }
 
-.ham-menu {
-    display: none;
-    color: red;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-}
-
 .main-container {
     background-color: #20c9966e;
     display: flex;
@@ -100,7 +94,14 @@ footer {
 .main-content {
     gap: 10px;
 }
-
+.weather > p{
+    font-size: 18px;
+    color: #000000;
+}
+.name{
+    font-size: 18px;
+    color: #000000;
+}
 
 /* MEDIA QUERIES */
 
